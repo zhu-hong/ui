@@ -222,7 +222,6 @@ const TouchRipple = forwardRef((props, ref) => {
       startTimer.current = setTimeout(() => {
         stop(event, cb)
       })
-      return
     }
 
     startTimerCommit.current = null

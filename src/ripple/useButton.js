@@ -1,10 +1,7 @@
 import useForkRef from './useForkRef'
 import useIsFocusVisible from './useIsFocusVisible'
 import { extractEventHandlers } from './useSlotProps'
-import { useRef } from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useCallback } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 
 export function useButton(parameters) {
   const { disabled = false, focusableWhenDisabled, rootRef: externalRef, tabIndex, type } = parameters
@@ -161,7 +158,7 @@ export function useButton(parameters) {
     }
 
   const updateHostElementName = useCallback((instance) => {
-    setHostElementName(instance?.tagName || '')
+    setHostElementName(instance ? instance.tagName : '')
   }, [])
 
   const handleRef = useForkRef(updateHostElementName, externalRef, focusVisibleRef, buttonRef)

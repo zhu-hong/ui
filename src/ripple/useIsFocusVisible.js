@@ -1,11 +1,10 @@
 // based on https://github.com/WICG/focus-visible/blob/v4.1.5/src/focus-visible.js
 
-import { useRef } from "react"
-import { useCallback } from "react"
+import { useRef, useCallback } from 'react'
 
 let hadKeyboardEvent = true
 let hadFocusVisibleRecently = false
-let hadFocusVisibleRecentlyTimeout
+let hadFocusVisibleRecentlyTimeout = null
 
 const inputTypesWhitelist = {
   text: true,

@@ -5,6 +5,7 @@ import useTouchRipple from './useTouchRipple'
 import useForkRef from './useForkRef'
 import { useSlotProps } from './useSlotProps'
 import { useButton } from './useButton'
+import clsx from 'clsx'
 
 setup(createElement)
 
@@ -16,13 +17,14 @@ export const RippleRoot = styled('button', forwardRef)`
 const Ripple = forwardRef((props, ref) => {
   const {
     children,
-    component = 'button',
+    as = 'button',
     disabled = false,
     centerRipple = false,
     focusRipple = true,
     disableRipple = false,
     disableTouchRipple = false,
     focusableWhenDisabled = false,
+    disabledClass,
     tabIndex = 0,
     type,
     ...other
@@ -46,9 +48,8 @@ const Ripple = forwardRef((props, ref) => {
     rippleRef,
   })
   
-
   useEffect(() => {
-    if (focusVisible && focusRipple && !disableRipple) {
+    if (focusVisible && focusRipple && !disableRipple && rippleRef.current) {
       rippleRef.current.pulsate()
     }
   }, [disableRipple, focusRipple, focusVisible])
@@ -63,9 +64,9 @@ const Ripple = forwardRef((props, ref) => {
     }),
     externalForwardedProps: other,
     additionalProps: {
-      as: component,
+      as,
     },
-    className: props.className,
+    className: clsx(props.className, disabled && disabledClass),
   })
 
   return (
