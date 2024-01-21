@@ -1,0 +1,94 @@
+.dlg-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+}
+.dlg {
+  max-width: 100%;
+  max-height: 100%;
+}
+.dlg-content {
+  position: relative;
+  background-color: #fff;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.dlg-header,.dlg-footer {
+  flex: 0 0 auto;
+}
+.dlg-body {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+.dlg-slide-enter,
+.dlg-slide-appear {
+  opacity: 0;
+  animation: .2s ease-in both paused;
+}
+.dlg-slide-leave {
+  animation: .2s ease-out both paused;
+}
+.dlg-slide-enter.dlg-slide-enter-active,
+.dlg-slide-appear.dlg-slide-appear-active {
+  animation-name: dlgslideIn;
+  animation-play-state: running;
+}
+.dlg-slide-leave.dlg-slide-leave-active {
+  animation-name: dlgslideOut;
+  animation-play-state: running;
+}
+@keyframes dlgslideIn {
+  from {
+    transform: scale(.95,.95) translate3d(0,4%,0);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dlgslideOut {
+  to {
+    opacity: 0;
+    transform: scale(.95,.95) translate3d(0,4%,0);
+  }
+}
+
+.dlg-mask {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.dlg-fade-enter,
+.dlg-fade-appear {
+  opacity: 0;
+  animation: .2s ease-in both paused;
+}
+.dlg-fade-leave {
+  animation: .2s ease-out both paused;
+}
+.dlg-fade-enter.dlg-fade-enter-active,
+.dlg-fade-appear.dlg-fade-appear-active {
+  animation-name: dlgFadeIn;
+  animation-play-state: running;
+}
+.dlg-fade-leave.dlg-fade-leave-active {
+  animation-name: dlgFadeOut;
+  animation-play-state: running;
+}
+@keyframes dlgFadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes dlgFadeOut {
+  to {
+    opacity: 0;
+  }
+}
