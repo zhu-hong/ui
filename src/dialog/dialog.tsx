@@ -1,4 +1,4 @@
-import { type FC, createElement } from 'react'
+import { type FC, createElement, useEffect } from 'react'
 import RCDialog, { DialogProps } from 'rc-dialog'
 import { keyframes, css, setup } from 'goober'
 
@@ -107,9 +107,11 @@ const initDialogCss = () => {
 }
 
 export const Dialog: FC<Omit<DialogProps, 'visible'|'prefixCls'|'animation'|'maskAnimation'>&{open?:boolean}> = ({ open, ...props }) => {
-  if(prefixCls === '') {
-    initDialogCss()
-  }
+  useEffect(() => {
+    if(prefixCls === '') {
+      initDialogCss()
+    }
+  }, [])
   return <RCDialog
     {...props}
     visible={open}
