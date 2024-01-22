@@ -1,4 +1,4 @@
-export function extractEventHandlers(object, excludeKeys = []) {
+export const extractEventHandlers = (object, excludeKeys = []) => {
   if (object === undefined) return {}
 
   const result = {}
@@ -10,7 +10,7 @@ export function extractEventHandlers(object, excludeKeys = []) {
   return result
 }
 
-export function omitEventHandlers(object) {
+export const omitEventHandlers = (object) => {
   if (object === undefined) return {}
 
   const result = {}
@@ -22,7 +22,7 @@ export function omitEventHandlers(object) {
   return result
 }
 
-export function mergeSlotProps(parameters) {
+export const mergeSlotProps = (parameters) => {
   const { getSlotProps, additionalProps, externalForwardedProps, className } = parameters
 
   const eventHandlers = extractEventHandlers(externalForwardedProps)

@@ -2,7 +2,7 @@ import { useRef, useState, useMemo, useEffect, useLayoutEffect } from 'react'
 
 const useEnhancedEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-function useEventCallback(fn) {
+const useEventCallback = (fn) => {
   const ref = useRef(fn)
   useEnhancedEffect(() => {
     ref.current = fn
@@ -10,10 +10,10 @@ function useEventCallback(fn) {
   return useRef((...args) => (0, ref.current)(...args)).current
 }
 
-const useTouchRipple = (props) => {
+export const useTouchRipple = (props) => {
   const { disabled, disableRipple, disableTouchRipple, rippleRef } = props
 
-  function useRippleHandler(rippleAction, skipRippleAction = disableTouchRipple) {
+  const useRippleHandler = (rippleAction, skipRippleAction = disableTouchRipple) => {
     return useEventCallback((event) => {
       if (!skipRippleAction && rippleRef.current) {
         rippleRef.current[rippleAction](event)
@@ -88,5 +88,3 @@ const useTouchRipple = (props) => {
     getRippleHandlers,
   }
 }
-
-export default useTouchRipple

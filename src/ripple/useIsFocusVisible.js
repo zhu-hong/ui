@@ -22,7 +22,7 @@ const inputTypesWhitelist = {
   'datetime-local': true,
 }
 
-function focusTriggersKeyboardModality(node) {
+const focusTriggersKeyboardModality = (node) => {
   const { type, tagName } = node
 
   if (tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) return true
@@ -34,17 +34,17 @@ function focusTriggersKeyboardModality(node) {
   return false
 }
 
-function handleKeyDown(event) {
+const handleKeyDown = (event) => {
   if (event.metaKey || event.altKey || event.ctrlKey) return
 
   hadKeyboardEvent = true
 }
 
-function handlePointerDown() {
+const handlePointerDown = () => {
   hadKeyboardEvent = false
 }
 
-function handleVisibilityChange(doc) {
+const handleVisibilityChange = (doc) => {
   if (doc.visibilityState === 'hidden') {
     if (hadFocusVisibleRecently) {
       hadKeyboardEvent = true
@@ -52,7 +52,7 @@ function handleVisibilityChange(doc) {
   }
 }
 
-function prepare(doc) {
+const prepare = (doc) => {
   doc.addEventListener('keydown', handleKeyDown, true)
   doc.addEventListener('mousedown', handlePointerDown, true)
   doc.addEventListener('pointerdown', handlePointerDown, true)
@@ -60,15 +60,7 @@ function prepare(doc) {
   doc.addEventListener('visibilitychange', handleVisibilityChange, true)
 }
 
-export function teardown(doc) {
-  doc.removeEventListener('keydown', handleKeyDown, true)
-  doc.removeEventListener('mousedown', handlePointerDown, true)
-  doc.removeEventListener('pointerdown', handlePointerDown, true)
-  doc.removeEventListener('touchstart', handlePointerDown, true)
-  doc.removeEventListener('visibilitychange', handleVisibilityChange, true)
-}
-
-function isFocusVisible(event) {
+const isFocusVisible = (event) => {
   const { target } = event
   try {
     return target.matches(':focus-visible')
@@ -79,7 +71,7 @@ function isFocusVisible(event) {
   return hadKeyboardEvent || focusTriggersKeyboardModality(target)
 }
 
-export default function useIsFocusVisible() {
+export const useIsFocusVisible = () => {
   const ref = useCallback((node) => {
     if (node != null) {
       prepare(node.ownerDocument)
@@ -88,7 +80,7 @@ export default function useIsFocusVisible() {
 
   const isFocusVisibleRef = useRef(false)
 
-  function handleBlurVisible() {
+  const handleBlurVisible = () => {
     if (isFocusVisibleRef.current) {
       hadFocusVisibleRecently = true
       window.clearTimeout(hadFocusVisibleRecentlyTimeout)
@@ -104,7 +96,7 @@ export default function useIsFocusVisible() {
     return false
   }
 
-  function handleFocusVisible(event) {
+  const handleFocusVisible = (event) => {
     if (isFocusVisible(event)) {
       isFocusVisibleRef.current = true
       return true

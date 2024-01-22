@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-function setRef(ref, value) {
+const setRef = (ref, value) => {
   if (typeof ref === 'function') {
     ref(value)
   } else if (ref) {
@@ -8,7 +8,7 @@ function setRef(ref, value) {
   }
 }
 
-export default function useForkRef(...refs) {
+export const useForkRef = (...refs) => {
   return useMemo(() => {
     if (refs.every((ref) => ref == null)) {
       return null

@@ -2,7 +2,7 @@ import { forwardRef, useRef, useCallback, useState, useEffect, useImperativeHand
 import { styled, keyframes } from 'goober'
 import { TransitionGroup } from 'react-transition-group'
 import clsx from 'clsx'
-import RippleItem from './RippleItem'
+import RippleAnimate from './RippleAnimate'
 
 const DURATION = 550
 const DELAY_RIPPLE = 80
@@ -51,7 +51,7 @@ const pulsateKeyframe = keyframes`
   }
 `
 
-export const TouchRippleRoot = styled('span', forwardRef)`
+const RippleRoot = styled('span', forwardRef)`
   overflow: hidden;
   pointerEvents: none;
   position: absolute;
@@ -59,7 +59,7 @@ export const TouchRippleRoot = styled('span', forwardRef)`
   inset: 0;
 `
 
-export const TouchRippleStyled = styled(RippleItem)`
+const RippleAnimated = styled(RippleAnimate)`
   opacity: 0;
   position: absolute;
   &.${rippleClasses.rippleVisible} {
@@ -91,7 +91,7 @@ export const TouchRippleStyled = styled(RippleItem)`
   }
 `
 
-const TouchRipple = forwardRef((props, ref) => {
+export const TouchRipple = forwardRef((props, ref) => {
   const { center: centerProp = false, classes = {}, className, ...other } = props
   const [ripples, setRipples] = useState([])
   const nextKey = useRef(0)
@@ -123,7 +123,7 @@ const TouchRipple = forwardRef((props, ref) => {
 
       setRipples((oldRipples) => [
         ...oldRipples,
-        <TouchRippleStyled
+        <RippleAnimated
           key={nextKey.current}
           classes={{
             ripple: clsx(classes.ripple, rippleClasses.ripple),
@@ -246,7 +246,7 @@ const TouchRipple = forwardRef((props, ref) => {
   )
 
   return (
-    <TouchRippleRoot
+    <RippleRoot
       className={clsx(classes.root, rippleClasses.root, className)}
       ref={container}
       {...other}
@@ -254,8 +254,6 @@ const TouchRipple = forwardRef((props, ref) => {
       <TransitionGroup component={null} exit>
         {ripples}
       </TransitionGroup>
-    </TouchRippleRoot>
+    </RippleRoot>
   )
 })
-
-export default TouchRipple

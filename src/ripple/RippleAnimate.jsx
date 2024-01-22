@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 
-const RippleItem = ({ className, classes, rippleX, rippleY, rippleSize, in: inProp, onExited, timeout, pulsate= false }) => {
+const RippleAnimate = ({ className, classes, rippleX, rippleY, rippleSize, in: inProp, onExited, timeout, pulsate= false }) => {
   const [leaving, setLeaving] = useState(false)
 
   const rippleClassName = clsx(className, classes.ripple, classes.rippleVisible, {
@@ -37,4 +37,4 @@ const RippleItem = ({ className, classes, rippleX, rippleY, rippleSize, in: inPr
   </span>
 }
 
-export default RippleItem
+export default RippleAnimate

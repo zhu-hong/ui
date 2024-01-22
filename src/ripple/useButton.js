@@ -1,9 +1,9 @@
-import useForkRef from './useForkRef'
-import useIsFocusVisible from './useIsFocusVisible'
+import { useForkRef } from './useForkRef'
+import { useIsFocusVisible } from './useIsFocusVisible'
 import { extractEventHandlers } from './useSlotProps'
 import { useRef, useState, useEffect, useCallback } from 'react'
 
-export function useButton(parameters) {
+export const useButton =(parameters) => {
   const { disabled = false, focusableWhenDisabled, rootRef: externalRef, tabIndex, type } = parameters
 
   const buttonRef = useRef(null)
