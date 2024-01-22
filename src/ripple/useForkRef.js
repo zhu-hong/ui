@@ -1,16 +1,16 @@
 import { useMemo } from 'react'
 
 const setRef = (ref, value) => {
-  if (typeof ref === 'function') {
+  if(typeof ref === 'function') {
     ref(value)
-  } else if (ref) {
+  } else if(ref) {
     ref.current = value
   }
 }
 
 export const useForkRef = (...refs) => {
   return useMemo(() => {
-    if (refs.every((ref) => ref == null)) {
+    if(refs.every((ref) => ref == null)) {
       return null
     }
 

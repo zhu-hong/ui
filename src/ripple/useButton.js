@@ -1,10 +1,10 @@
-import { useForkRef } from './useForkRef'
-import { useIsFocusVisible } from './useIsFocusVisible'
-import { extractEventHandlers } from './useSlotProps'
 import { useRef, useState, useEffect, useCallback } from 'react'
+import { extractEventHandlers } from './useSlotProps'
+import { useIsFocusVisible } from './useIsFocusVisible'
+import { useForkRef } from './useForkRef'
 
-export const useButton =(parameters) => {
-  const { disabled = false, focusableWhenDisabled, rootRef: externalRef, tabIndex, type } = parameters
+export const useButton =(params) => {
+  const { disabled = false, focusableWhenDisabled, rootRef: externalRef, tabIndex, type } = params
 
   const buttonRef = useRef(null)
 
@@ -18,7 +18,7 @@ export const useButton =(parameters) => {
   } = useIsFocusVisible()
 
   const [focusVisible, setFocusVisible] = useState(false)
-  if (disabled && !focusableWhenDisabled && focusVisible) {
+  if(disabled && !focusableWhenDisabled && focusVisible) {
     setFocusVisible(false)
   }
 
@@ -29,7 +29,7 @@ export const useButton =(parameters) => {
   const [hostElementName, setHostElementName] = useState('')
 
   const createHandleMouseLeave = (otherHandlers) => (event) => {
-    if (focusVisible) {
+    if(focusVisible) {
       event.preventDefault()
     }
 
@@ -41,7 +41,7 @@ export const useButton =(parameters) => {
   const createHandleBlur = (otherHandlers) => (event) => {
     handleBlurVisible(event)
 
-    if (isFocusVisibleRef.current === false) {
+    if(isFocusVisibleRef.current === false) {
       setFocusVisible(false)
     }
 
@@ -52,12 +52,12 @@ export const useButton =(parameters) => {
 
   const createHandleFocus =
     (otherHandlers) => (event) => {
-      if (!buttonRef.current) {
+      if(!buttonRef.current) {
         buttonRef.current = event.currentTarget
       }
 
       handleFocusVisible(event)
-      if (isFocusVisibleRef.current === true) {
+      if(isFocusVisibleRef.current === true) {
         setFocusVisible(true)
         if(otherHandlers.onFocusVisible) {
           otherHandlers.onFocusVisible(event)
@@ -82,7 +82,7 @@ export const useButton =(parameters) => {
   }
 
   const createHandleClick = (otherHandlers) => (event) => {
-    if (!disabled) {
+    if(!disabled) {
       if(otherHandlers.onClick) {
         otherHandlers.onClick(event)
       }
@@ -90,7 +90,7 @@ export const useButton =(parameters) => {
   }
 
   const createHandleMouseDown = (otherHandlers) => (event) => {
-    if (!disabled) {
+    if(!disabled) {
       setActive(true)
       document.addEventListener('mouseup',
         () => {
@@ -111,17 +111,17 @@ export const useButton =(parameters) => {
         otherHandlers.onKeyDown(event)
       }
 
-      if (event.defaultMuiPrevented) return
+      if(event.defaultMuiPrevented) return
 
-      if (event.target === event.currentTarget && !isNativeButton() && event.key === ' ') {
+      if(event.target === event.currentTarget && !isNativeButton() && event.key === ' ') {
         event.preventDefault()
       }
 
-      if (event.target === event.currentTarget && event.key === ' ' && !disabled) {
+      if(event.target === event.currentTarget && event.key === ' ' && !disabled) {
         setActive(true)
       }
 
-      if (
+      if(
         event.target === event.currentTarget &&
         !isNativeButton() &&
         event.key === 'Enter' &&
@@ -136,7 +136,7 @@ export const useButton =(parameters) => {
 
   const createHandleKeyUp =
     (otherHandlers) => (event) => {
-      if (event.target === event.currentTarget) {
+      if(event.target === event.currentTarget) {
         setActive(false)
       }
 
@@ -144,7 +144,7 @@ export const useButton =(parameters) => {
         otherHandlers.onKeyUp(event)
       }
 
-      if (
+      if(
         event.target === event.currentTarget &&
         !isNativeButton() &&
         !disabled &&
@@ -165,19 +165,19 @@ export const useButton =(parameters) => {
 
   const buttonProps = {}
 
-  if (tabIndex !== undefined) {
+  if(tabIndex !== undefined) {
     buttonProps.tabIndex = tabIndex
   }
 
-  if (hostElementName === 'BUTTON') {
+  if(hostElementName === 'BUTTON') {
     buttonProps.type = type || 'button'
-    if (focusableWhenDisabled) {
+    if(focusableWhenDisabled) {
       buttonProps['aria-disabled'] = disabled
     } else {
       buttonProps.disabled = disabled
     }
-  } else if (hostElementName !== '') {
-    if (disabled) {
+  } else if(hostElementName !== '') {
+    if(disabled) {
       buttonProps['aria-disabled'] = disabled
       buttonProps.tabIndex = focusableWhenDisabled ? (tabIndex || 0) : -1
     }
@@ -185,7 +185,7 @@ export const useButton =(parameters) => {
 
   const getRootProps = (externalProps) => {
     const externalEventHandlers = {
-      ...extractEventHandlers(parameters),
+      ...extractEventHandlers(params),
       ...extractEventHandlers(externalProps),
     }
 

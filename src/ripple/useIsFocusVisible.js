@@ -25,17 +25,17 @@ const inputTypesWhitelist = {
 const focusTriggersKeyboardModality = (node) => {
   const { type, tagName } = node
 
-  if (tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) return true
+  if(tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) return true
 
-  if (tagName === 'TEXTAREA' && !node.readOnly) return true
+  if(tagName === 'TEXTAREA' && !node.readOnly) return true
 
-  if (node.isContentEditable) return true
+  if(node.isContentEditable) return true
 
   return false
 }
 
 const handleKeyDown = (event) => {
-  if (event.metaKey || event.altKey || event.ctrlKey) return
+  if(event.metaKey || event.altKey || event.ctrlKey) return
 
   hadKeyboardEvent = true
 }
@@ -45,8 +45,8 @@ const handlePointerDown = () => {
 }
 
 const handleVisibilityChange = (doc) => {
-  if (doc.visibilityState === 'hidden') {
-    if (hadFocusVisibleRecently) {
+  if(doc.visibilityState === 'hidden') {
+    if(hadFocusVisibleRecently) {
       hadKeyboardEvent = true
     }
   }
@@ -73,7 +73,7 @@ const isFocusVisible = (event) => {
 
 export const useIsFocusVisible = () => {
   const ref = useCallback((node) => {
-    if (node != null) {
+    if(node != null) {
       prepare(node.ownerDocument)
     }
   }, [])
@@ -81,7 +81,7 @@ export const useIsFocusVisible = () => {
   const isFocusVisibleRef = useRef(false)
 
   const handleBlurVisible = () => {
-    if (isFocusVisibleRef.current) {
+    if(isFocusVisibleRef.current) {
       hadFocusVisibleRecently = true
       window.clearTimeout(hadFocusVisibleRecentlyTimeout)
       hadFocusVisibleRecentlyTimeout = window.setTimeout(() => {
@@ -97,7 +97,7 @@ export const useIsFocusVisible = () => {
   }
 
   const handleFocusVisible = (event) => {
-    if (isFocusVisible(event)) {
+    if(isFocusVisible(event)) {
       isFocusVisibleRef.current = true
       return true
     }

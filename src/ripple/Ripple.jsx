@@ -1,17 +1,16 @@
-import { styled, setup } from 'goober'
 import { createElement, forwardRef, useRef, useEffect } from 'react'
+import { styled, setup } from 'goober'
 import { TouchRipple } from './TouchRipple'
 import { useTouchRipple } from './useTouchRipple'
+import { useButton } from './useButton'
 import { useForkRef } from './useForkRef'
 import { useSlotProps } from './useSlotProps'
-import { useButton } from './useButton'
 import clsx from 'clsx'
 
 setup(createElement)
 
 export const RippleRoot = styled('button', forwardRef)`
   position: relative;
-  -webkit-tap-highlight-color: transparent;
 `
 
 export const Ripple = forwardRef((props, ref) => {

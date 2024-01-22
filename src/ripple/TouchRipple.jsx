@@ -1,7 +1,6 @@
 import { forwardRef, useRef, useCallback, useState, useEffect, useImperativeHandle } from 'react'
 import { styled, keyframes } from 'goober'
 import { TransitionGroup } from 'react-transition-group'
-import clsx from 'clsx'
 import RippleAnimate from './RippleAnimate'
 
 const DURATION = 550
@@ -88,8 +87,7 @@ const RippleAnimated = styled(RippleAnimate)`
   }
 `
 
-export const TouchRipple = forwardRef((props, ref) => {
-  const { center: centerProp = false, classes = {}, className, ...other } = props
+export const TouchRipple = forwardRef(({ center: centerProp = false }, ref) => {
   const [ripples, setRipples] = useState([])
   const nextKey = useRef(0)
   const rippleCallback = useRef(null)
@@ -106,7 +104,6 @@ export const TouchRipple = forwardRef((props, ref) => {
   const startTimer = useRef(null)
 
   const startTimerCommit = useRef(null)
-  const container = useRef(null)
 
   useEffect(() => {
     return () => {
@@ -114,34 +111,31 @@ export const TouchRipple = forwardRef((props, ref) => {
     }
   }, [])
 
-  const startCommit = useCallback(
-    (params) => {
-      const { rippleX, rippleY, rippleSize, cb, pulsate } = params
+  const startCommit = useCallback((params) => {
+    const { rippleX, rippleY, rippleSize, cb, pulsate } = params
 
-      setRipples((oldRipples) => [
-        ...oldRipples,
-        <RippleAnimated
-          key={nextKey.current}
-          classes={{
-            ripple: clsx(classes.ripple, rippleClasses.ripple),
-            rippleVisible: clsx(classes.rippleVisible, rippleClasses.rippleVisible),
-            child: clsx(classes.child, rippleClasses.child),
-            childLeaving: clsx(classes.childLeaving, rippleClasses.childLeaving),
-            ripplePulsate: clsx(classes.ripplePulsate, rippleClasses.ripplePulsate),
-            childPulsate: clsx(classes.childPulsate, rippleClasses.childPulsate),
-          }}
-          timeout={DURATION}
-          rippleX={rippleX}
-          rippleY={rippleY}
-          rippleSize={rippleSize}
-          pulsate={pulsate}
-        />
-      ])
-      nextKey.current += 1
-      rippleCallback.current = cb
-    },
-    [classes],
-  )
+    setRipples((oldRipples) => [
+      ...oldRipples,
+      <RippleAnimated
+        key={nextKey.current}
+        classes={{
+          ripple: rippleClasses.ripple,
+          rippleVisible: rippleClasses.rippleVisible,
+          child: rippleClasses.child,
+          childLeaving: rippleClasses.childLeaving,
+          ripplePulsate: rippleClasses.ripplePulsate,
+          childPulsate: rippleClasses.childPulsate,
+        }}
+        timeout={DURATION}
+        rippleX={rippleX}
+        rippleY={rippleY}
+        rippleSize={rippleSize}
+        pulsate={pulsate}
+      />
+    ])
+    nextKey.current += 1
+    rippleCallback.current = cb
+  }, [])
 
   const start = useCallback(
     (event = {}, options = {}, cb = () => { }) => {
@@ -159,8 +153,7 @@ export const TouchRipple = forwardRef((props, ref) => {
         ignoringMouseDown.current = true
       }
 
-      const element = fakeElement ? null : container.current
-      const rect = element ? element.getBoundingClientRect() : { width: 0, height: 0, left: 0, top: 0 }
+      const rect = fakeElement ? fakeElement.getBoundingClientRect() : { width: 0, height: 0, left: 0, top: 0 }
 
       let rippleX = 0
       let rippleY = 0
@@ -182,8 +175,8 @@ export const TouchRipple = forwardRef((props, ref) => {
           rippleSize += 1
         }
       } else {
-        const sizeX = Math.max(Math.abs((element ? element.clientWidth : 0) - rippleX), rippleX) * 2 + 2
-        const sizeY = Math.max(Math.abs((element ? element.clientHeight : 0) - rippleY), rippleY) * 2 + 2
+        const sizeX = Math.max(Math.abs((fakeElement ? fakeElement.clientWidth : 0) - rippleX), rippleX) * 2 + 2
+        const sizeY = Math.max(Math.abs((fakeElement ? fakeElement.clientHeight : 0) - rippleY), rippleY) * 2 + 2
         rippleSize = Math.sqrt(sizeX ** 2 + sizeY ** 2)
       }
 
@@ -203,7 +196,7 @@ export const TouchRipple = forwardRef((props, ref) => {
         startCommit({ rippleX, rippleY, rippleSize, cb, pulsate: options.pulsate })
       }
     },
-    [centerProp, startCommit],
+    [centerProp, startCommit]
   )
 
   const pulsate = useCallback(() => {
@@ -239,14 +232,12 @@ export const TouchRipple = forwardRef((props, ref) => {
       stop,
       pulsate,
     }),
-    [pulsate, start, stop],
+    [pulsate, start, stop]
   )
 
   return (
     <RippleRoot
-      className={clsx(classes.root, rippleClasses.root, className)}
-      ref={container}
-      {...other}
+      className={rippleClasses.root}
     >
       <TransitionGroup component={null} exit>
         {ripples}
