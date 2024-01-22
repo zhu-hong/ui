@@ -24,7 +24,8 @@ export const Ripple = forwardRef((props, ref) => {
     disableRipple = false,
     disableTouchRipple = false,
     focusableWhenDisabled = false,
-    disabledClass,
+    disabledClassName,
+    focusVisibleClassName,
     tabIndex = 0,
     type,
     ...other
@@ -66,7 +67,7 @@ export const Ripple = forwardRef((props, ref) => {
     additionalProps: {
       as,
     },
-    className: clsx(props.className, disabled && disabledClass),
+    className: clsx(props.className, disabled && disabledClassName, focusVisible && focusVisibleClassName),
   })
 
   return (
