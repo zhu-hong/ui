@@ -84,9 +84,6 @@ const RippleAnimated = styled(RippleAnimate)`
     animation-duration: 200ms;
   }
   & .${rippleClasses.childPulsate} {
-    position: absolute;
-    left: 0px;
-    top: 0;
     animation: 2500ms ${pulsateKeyframe} cubic-bezier(0.4, 0, 0.2, 1) infinite 200ms;
   }
 `

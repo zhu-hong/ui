@@ -14,7 +14,7 @@ export const RippleRoot = styled('button', forwardRef)`
   -webkit-tap-highlight-color: transparent;
 `
 
-const Ripple = forwardRef((props, ref) => {
+export const Ripple = forwardRef((props, ref) => {
   const {
     children,
     as = 'button',
@@ -78,5 +78,3 @@ const Ripple = forwardRef((props, ref) => {
     </RippleRoot>
   )
 })
-
-export default Ripple

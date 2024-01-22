@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Dialog } from "./dialog/dialog"
-import Ripple from "./ripple/Ripple"
+import { Ripple } from "./ripple/Ripple"
 
-export default () => {
+export const App = () => {
   const [open, setOpen] = useState(false)
   return <>
     <Ripple style={{padding:120}} onClick={() => setOpen(true)}>
