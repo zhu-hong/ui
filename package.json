@@ -12,6 +12,7 @@
     "clsx": "2.1.0",
     "goober": "2.1.14",
     "rc-dialog": "9.3.4",
+    "rc-select": "14.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-transition-group": "4.4.5",

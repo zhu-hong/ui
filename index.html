@@ -6,48 +6,48 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    /*cssreset*/
+    /* css reset */
     @font-face {
       font-family: Emoji;
       src: local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol"), local("Noto Color Emoji");
-      unicode-range: U+1F000-1F644, U+203C-3299
+      unicode-range: u+1f000-1f644, u+203c-3299
     }
 
     .fontserif {
-      font-family: Georgia, Cambria, "Times New Roman", Times, serif
+      font-family: Georgia, Cambria, Times New Roman, Times, serif
     }
 
     .fontmono {
-      font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+      font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace
     }
 
     *,
-    ::before,
-    ::after {
-      box-sizing: border-box;
-      border-width: 0;
-      border-style: solid;
-      border-color: #CECECE
+    :after,
+    :before {
+      border: 0 solid #cecece;
+      box-sizing: border-box
     }
 
     html {
-      line-height: 1.5;
+      font-family: system-ui, —apple-system, Segoe UI, Rototo, Emoji, Helvetica, Arial, sans-serif;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
       -moz-tab-size: 4;
       tab-size: 4
     }
 
     body {
-      margin: 0;
       line-height: inherit;
-      font-family: system-ui, —apple-system, Segoe UI, Rototo, Emoji, Helvetica, Arial, sans-serif
+      margin: 0
     }
 
     hr {
-      height: 0;
+      border-top-width: 1px;
       color: inherit;
-      border-top-width: 1px
+      height: 0
     }
 
     abbr:where([title]) {
@@ -76,9 +76,9 @@
 
     code,
     kbd,
-    samp,
-    pre {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    pre,
+    samp {
+      font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
       font-size: 1em
     }
 
@@ -95,17 +95,17 @@
     }
 
     sub {
-      bottom: -0.25em
+      bottom: -.25em
     }
 
     sup {
-      top: -0.5em
+      top: -.5em
     }
 
     table {
-      text-indent: 0;
+      border-collapse: collapse;
       border-color: inherit;
-      border-collapse: collapse
+      text-indent: 0
     }
 
     button,
@@ -113,13 +113,13 @@
     optgroup,
     select,
     textarea {
+      color: inherit;
       font-family: inherit;
       font-feature-settings: inherit;
-      font-variation-settings: inherit;
       font-size: 100%;
+      font-variation-settings: inherit;
       font-weight: inherit;
       line-height: inherit;
-      color: inherit;
       margin: 0;
       padding: 0
     }
@@ -129,10 +129,10 @@
       text-transform: none
     }
 
-    button,
-    [type='button'],
-    [type='reset'],
-    [type='submit'] {
+    [type=button],
+    [type=reset],
+    [type=submit],
+    button {
       -webkit-appearance: button;
       background-image: none
     }
@@ -154,7 +154,7 @@
       height: auto
     }
 
-    [type='search'] {
+    [type=search] {
       -webkit-appearance: textfield;
       outline-offset: -2px
     }
@@ -173,8 +173,10 @@
     }
 
     blockquote,
-    dl,
     dd,
+    dl,
+    fieldset,
+    figure,
     h1,
     h2,
     h3,
@@ -182,24 +184,19 @@
     h5,
     h6,
     hr,
-    figure,
     p,
     pre {
       margin: 0
     }
 
-    fieldset {
-      margin: 0;
-      padding: 0
-    }
-
+    fieldset,
     legend {
       padding: 0
     }
 
+    menu,
     ol,
-    ul,
-    menu {
+    ul {
       list-style: none;
       margin: 0;
       padding: 0
@@ -211,12 +208,12 @@
 
     input::placeholder,
     textarea::placeholder {
-      opacity: 1;
-      color: #9ca3af
+      color: #cecece;
+      opacity: 1
     }
 
-    button,
-    [role="button"] {
+    [role=button],
+    button {
       cursor: pointer
     }
 
@@ -224,34 +221,28 @@
       cursor: default
     }
 
-    img,
-    svg,
-    video,
-    canvas,
     audio,
-    iframe,
+    canvas,
     embed,
-    object {
+    iframe,
+    img,
+    object,
+    svg,
+    video {
       display: block;
       vertical-align: middle
     }
 
     img,
     video {
-      max-width: 100%;
-      height: auto
+      height: auto;
+      max-width: 100%
     }
 
-    [hidden] {
-      display: none
-    }
-
-    html,
     body,
-    #root {
-      width: 100%;
+    html {
       height: 100%;
-      overflow: hidden;
+      width: 100%
     }
   </style>
   <title>Vite + React</title>
