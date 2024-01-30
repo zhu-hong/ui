@@ -19,7 +19,7 @@ export const Ripple = forwardRef((props, ref) => {
     as = 'button',
     disabled = false,
     centerRipple = false,
-    focusRipple = true,
+    focusRipple = false,
     disableRipple = false,
     disableTouchRipple = false,
     focusableWhenDisabled = false,

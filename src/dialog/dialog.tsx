@@ -1,5 +1,5 @@
 import { type FC, createElement, useEffect, useState } from 'react'
-import RCDialog, { DialogProps } from 'rc-dialog'
+import RcDialog, { type DialogProps } from 'rc-dialog'
 import { keyframes, css, setup } from 'goober'
 import { render, unmount } from 'rc-util/es/React/render'
 
@@ -21,7 +21,7 @@ const initDialogCss = () => {
 
   const slideInAnimate = keyframes`
     from {
-      transform: scale(.95,.95) translate3d(0,4%,0);
+      transform: scale(.99,.99) translateY(1%);
     }
 
     to {
@@ -31,7 +31,7 @@ const initDialogCss = () => {
   const slideOutAnimate = keyframes`
     to {
       opacity: 0;
-      transform: scale(.95,.95) translate3d(0,4%,0);
+      transform: scale(.99,.99) translateY(1%);
     }
   `
   prefixCls = css`
@@ -46,8 +46,6 @@ const initDialogCss = () => {
       align-items: center;
       padding: 32px;
     }
-    & {
-    }
     &-content {
       position: relative;
       background-color: #fff;
@@ -56,6 +54,7 @@ const initDialogCss = () => {
       display: flex;
       flex-direction: column;
       overflow: auto;
+      transform: translateZ(0px);
     }
     &-header,&-footer {
       flex: 0 0 auto;
@@ -67,10 +66,10 @@ const initDialogCss = () => {
     &-slide-enter,
     &-slide-appear {
       opacity: 0;
-      animation: .2s ease-in both paused;
+      animation: 270ms ease both paused;
     }
     &-slide-leave {
-      animation: .2s ease-out both paused;
+      animation: 270ms ease both paused;
     }
     &-slide-enter&-slide-enter-active,
     &-slide-appear&-slide-appear-active {
@@ -90,10 +89,10 @@ const initDialogCss = () => {
     &-fade-enter,
     &-fade-appear {
       opacity: 0;
-      animation: .2s ease-in both paused;
+      animation: 270ms ease both paused;
     }
     &-fade-leave {
-      animation: .2s ease-out both paused;
+      animation: 270ms ease both paused;
     }
     &-fade-enter&-fade-enter-active,
     &-fade-appear&-fade-appear-active {
@@ -113,7 +112,7 @@ export const Dialog: FC<Omit<DialogProps, 'visible'|'prefixCls'|'animation'|'mas
       initDialogCss()
     }
   }, [])
-  return <RCDialog
+  return <RcDialog
     {...props}
     visible={open}
     prefixCls={prefixCls}
