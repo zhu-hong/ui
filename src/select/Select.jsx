@@ -5,21 +5,18 @@ import './select.css'
 
 export const Select = () => {
   return <RcSelect
-    showAction={['focus','focus']}
+    showAction={['click']}
     // open={true}
     placeholder='请选择'
     animation='slide'
-    dropdownMatchSelectWidth={false}
-    showSearch
+    // showSearch
     filterOption={(val, opt) => opt.label.includes(val) || opt.value.includes(val)}
-    // loading
     allowClear={{
-      clearIcon: <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4"></path></svg>,
+      clearIcon: <Ripple centerRipple className='p-4px rounded-full'><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4"></path></svg></Ripple>,
     }}
-    // suffixIcon={<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="currentColor" d="M1 3h22L12 22"></path></svg>}
     options={[
       {
-        label: '卡了卡了卡了卡了卡了卡了卡了卡了卡了',
+        label: '卡了很久卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了卡了',
         value: 'kale',
       },
       {
