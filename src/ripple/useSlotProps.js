@@ -1,5 +1,5 @@
 export const extractEventHandlers = (object, excludeKeys = []) => {
-  if (object === undefined) return {}
+  if(object === undefined) return {}
 
   const result = {}
 
@@ -11,7 +11,7 @@ export const extractEventHandlers = (object, excludeKeys = []) => {
 }
 
 export const omitEventHandlers = (object) => {
-  if (object === undefined) return {}
+  if(object === undefined) return {}
 
   const result = {}
 

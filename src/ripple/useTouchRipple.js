@@ -15,7 +15,7 @@ export const useTouchRipple = (props) => {
 
   const useRippleHandler = (rippleAction, skipRippleAction = disableTouchRipple) => {
     return useEventCallback((event) => {
-      if (!skipRippleAction && rippleRef.current) {
+      if(!skipRippleAction && rippleRef.current) {
         rippleRef.current[rippleAction](event)
       }
 

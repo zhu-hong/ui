@@ -49,7 +49,7 @@ export const Ripple = forwardRef((props, ref) => {
   })
   
   useEffect(() => {
-    if (focusVisible && focusRipple && !disableRipple && rippleRef.current) {
+    if(focusVisible && focusRipple && !disableRipple && rippleRef.current) {
       rippleRef.current.pulsate()
     }
   }, [disableRipple, focusRipple, focusVisible])

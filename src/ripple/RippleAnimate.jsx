@@ -20,11 +20,11 @@ const RippleAnimate = ({ className, classes, rippleX, rippleY, rippleSize, in: i
     [classes.childPulsate]: pulsate,
   })
 
-  if (!inProp && !leaving) {
+  if(!inProp && !leaving) {
     setLeaving(true)
   }
   useEffect(() => {
-    if (!inProp && onExited != null) {
+    if(!inProp && onExited != null) {
       const timeoutId = setTimeout(onExited, timeout)
       return () => {
         clearTimeout(timeoutId)
