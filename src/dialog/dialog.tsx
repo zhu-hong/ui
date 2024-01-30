@@ -1,6 +1,7 @@
-import { type FC, createElement, useEffect } from 'react'
+import { type FC, createElement, useEffect, useState } from 'react'
 import RCDialog, { DialogProps } from 'rc-dialog'
 import { keyframes, css, setup } from 'goober'
+import { render, unmount } from 'rc-util/es/React/render'
 
 setup(createElement)
 
@@ -119,4 +120,31 @@ export const Dialog: FC<Omit<DialogProps, 'visible'|'prefixCls'|'animation'|'mas
     animation='slide'
     maskAnimation='fade'
   />
+}
+
+const ConfirmDialog = ({ afterClose, resolve, reject }) => {
+  const [open, setOpen] = useState(true)
+
+  return <Dialog title='提示' open={open} onClose={() => setOpen(false)} footer={<>
+    <button onClick={() => {
+      resolve()
+      setOpen(false)
+    }}>同意</button>
+    <button onClick={() => {
+      reject()
+      setOpen(false)
+    }}>不同意</button>
+  </>} afterClose={afterClose}>
+    这是☝️提示
+  </Dialog>
+}
+
+export const confirm = () => {
+  return new Promise((resolve, reject) => {
+    const container = document.createDocumentFragment()
+
+    render(<ConfirmDialog afterClose={() => {
+      unmount(container)
+    }} resolve={resolve} reject={reject} />, container)
+  })
 }

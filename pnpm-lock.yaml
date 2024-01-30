@@ -17,6 +17,9 @@ dependencies:
   rc-select:
     specifier: 14.11.0
     version: 14.11.0(react-dom@18.2.0)(react@18.2.0)
+  rc-util:
+    specifier: 5.38.1
+    version: 5.38.1(react-dom@18.2.0)(react@18.2.0)
   react:
     specifier: 18.2.0
     version: 18.2.0

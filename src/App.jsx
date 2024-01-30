@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { Dialog } from "./dialog/Dialog"
+import { Dialog, confirm } from "./dialog/Dialog"
 import { Ripple } from "./ripple/Ripple"
 import { Select } from "./select/Select"
 
 export const App = () => {
   const [open, setOpen] = useState(false)
   return <>
-    <Ripple style={{padding:24}} onClick={() => setOpen(true)}>
+    <Ripple style={{padding:24}} onClick={confirm}>
       🥳OK？
     </Ripple>
 
