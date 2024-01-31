@@ -6,13 +6,9 @@ import { Select } from "./select/Select"
 export const App = () => {
   const [open, setOpen] = useState(false)
   return <div className="p-4">
-    <Ripple style={{padding:24}} focusRipple={true}>
+    <Ripple style={{padding:24}} focusRipple={true} onClick={() => setOpen(true)}>
       🥳OK？
     </Ripple>
-
-    <br />
-    <br />
-    <br />
 
     <Select />
 

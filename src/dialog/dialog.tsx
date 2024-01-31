@@ -44,7 +44,7 @@ const initDialogCss = () => {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 32px;
+      padding: 1rem;
     }
     &-content {
       position: relative;
