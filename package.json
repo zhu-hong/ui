@@ -11,6 +11,7 @@
   "dependencies": {
     "clsx": "2.1.0",
     "goober": "2.1.14",
+    "mui-ripple": "^1.0.3",
     "rc-dialog": "9.3.4",
     "rc-select": "14.11.0",
     "rc-util": "5.38.1",

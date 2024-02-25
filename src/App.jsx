@@ -1,12 +1,12 @@
 import { useState } from "react"
-import { Dialog } from "./dialog/Dialog"
-import { Ripple } from "./ripple/Ripple"
+import { Dialog } from "./dialog/dialog"
+import { Ripple } from "mui-ripple"
 import { Select } from "./select/Select"
 
 export const App = () => {
   const [open, setOpen] = useState(false)
   return <div className="p-4">
-    <Ripple style={{padding:24}} focusRipple={true} onClick={() => setOpen(true)}>
+    <Ripple sx={{padding:24}} focusRipple={true} onClick={() => setOpen(true)}>
       🥳OK？
     </Ripple>
 
