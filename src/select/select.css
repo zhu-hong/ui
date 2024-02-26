@@ -99,6 +99,7 @@
 }
 .d2mslt-selection-item-remove {
   flex: none;
+  display: flex;
 }
 .d2mslt-single.d2mslt-show-search .d2mslt-selection-item {
   display: block;
