@@ -1,10 +1,17 @@
 .d2mslt {
-  max-width: 520px;
   position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
   border: 1px solid #CECECE;
+}
+.d2mslt:not(.d2mslt-focused):not(.d2mslt-open):not(.d2mslt-disabled):hover {
+  border-color: #058373;
+}
+.d2mslt-focused,
+.d2mslt-open {
+  border-color: transparent;
+  outline: 2px solid #058373;
 }
 .d2mslt-disabled,
 .d2mslt-disabled input {
@@ -17,32 +24,9 @@
   flex: auto;
   overflow: hidden;
 }
-.d2mslt-focused,
-.d2mslt-open {
-  border-color: transparent;
-  outline: 2px solid #058373;
-}
-.d2mslt:not(.d2mslt-open):not(.d2mslt-focused):not(.d2mslt-disabled):hover {
-  border-color: #058373;
-}
-.d2mslt-single .d2mslt-selection-search {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-.d2mslt-single .d2mslt-selection-search .d2mslt-selection-search-input {
-  width: 100%;
-  height: 100%;
-  padding: 6px 10px;
-}
-.d2mslt-multiple .d2mslt-selection-search {
-  max-width: 100%;
-}
 .d2mslt-selection-search-input {
   width: 100%;
+  height: 100%;
   border-radius: 0;
   outline: none;
   appearance: none;
@@ -53,19 +37,29 @@
   display: none;
   appearance: none;
 }
+.d2mslt-single .d2mslt-selection-search-input {
+  padding: 6px 10px;
+}
 .d2mslt-selection-placeholder {
+  display: block;
   width: 100%;
   color: #CECECE;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.d2mslt-multiple.d2mslt-show-search .d2mslt-selection-placeholder {
+.d2mslt-multiple.d2mslt-open.d2mslt-show-search .d2mslt-selection-placeholder {
   padding: 0px 10px;
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+}
+.d2mslt-arrow-loading {
+  display: none;
+}
+.d2mslt-loading .d2mslt-arrow-loading {
+  display: block;
 }
 .d2mslt-clear,
 .d2mslt-arrow {
@@ -75,43 +69,16 @@
   align-items: center;
   padding-right: 4px;
 }
-.d2mslt-loading .d2mslt-clear {
-  display: none;
-}
-.d2mslt-arrow {
-  display: none;
-}
-.d2mslt-loading .d2mslt-arrow {
-  display: block;
-}
-.d2mslt-multiple .d2mslt-selection-search-mirror {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  visibility: hidden;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 1;
-  transform: translateY(-50%);
-}
 .d2mslt-selection-overflow {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-right: -6px;
-  margin-bottom: -6px;
+  gap: 6px;
 }
 .d2mslt-selection-overflow-item {
   width: fit-content;
   max-width: 100%;
   flex: none;
-  margin-right: 6px;
-  margin-bottom: 6px;
-}
-.d2mslt-multiple:not(.d2mslt-open) .d2mslt-selection-overflow-item-suffix {
-  display: block;
 }
 .d2mslt-selection-overflow-item-suffix {
   display: none;
@@ -124,10 +91,6 @@
   border-radius: 12px;
   background-color: #E9E9E9;
 }
-.d2mslt-selection-overflow-item:not(.d2mslt-selection-overflow-item-suffix) .d2mslt-selection-item {
-  display: flex;
-  align-items: center;
-}
 .d2mslt-selection-item-content {
   flex: auto;
   overflow: hidden;
@@ -136,6 +99,40 @@
 }
 .d2mslt-selection-item-remove {
   flex: none;
+}
+.d2mslt-single.d2mslt-show-search .d2mslt-selection-item {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.d2mslt-selection-overflow-item:not(.d2mslt-selection-overflow-item-suffix) .d2mslt-selection-item {
+  display: flex;
+  align-items: center;
+}
+.d2mslt-single .d2mslt-selection-search {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.d2mslt-multiple .d2mslt-selection-search {
+  max-width: 100%;
+}
+.d2mslt-multiple .d2mslt-selection-search-mirror {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  visibility: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  transform: translateY(-50%);
 }
 
 /* dropdown区 */
@@ -152,7 +149,6 @@
   text-align: center;
   color: #CECECE;
 }
-
 .rc-virtual-list {
   transform: translateZ(0px);
 }
@@ -166,6 +162,14 @@
 .d2mslt-item-option-selected {
   color: #058373;
   background-color: rgba(5, 131, 115, .1);
+}
+.d2mslt-item-option-content > div {
+  width: 100%;
+  height: 100%;
+  text-align: start;
+  padding: 10px 16px;
+  background-color: transparent;
+  user-select: none;
 }
 .d2mslt-item-option-selected .d2mslt-item-option-content > div {
   padding-right: 36px;

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Dialog } from "./dialog/dialog"
 import { Ripple } from "mui-ripple"
-import { Select } from "./select/Select"
+import { Select } from "./select/select"
 
 export const App = () => {
   const [open, setOpen] = useState(false)
@@ -10,7 +10,7 @@ export const App = () => {
       🥳OK？
     </Ripple>
 
-    <Select />
+    <Select className="w-250px text-22px" optionClassName="text-20px" options={[{label:'ka',value:'ka'},{label:'kale',value:'kale'},{label:'卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡',value:'kal'}]} optionRender={(opt) => opt.value+'-'+opt.label} />
 
     <Dialog open={open} onClose={() => setOpen(false)}>
       <div className="w-1150px px-24px py-20px">
