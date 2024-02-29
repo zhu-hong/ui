@@ -18,8 +18,8 @@ dependencies:
     specifier: 9.3.4
     version: 9.3.4(react-dom@18.2.0)(react@18.2.0)
   rc-select:
-    specifier: 14.11.0
-    version: 14.11.0(react-dom@18.2.0)(react@18.2.0)
+    specifier: 14.12.0
+    version: 14.12.0(react-dom@18.2.0)(react@18.2.0)
   rc-util:
     specifier: 5.38.2
     version: 5.38.2(react-dom@18.2.0)(react@18.2.0)
@@ -37,12 +37,12 @@ dependencies:
     version: 3.2.0
   unocss:
     specifier: 0.58.5
-    version: 0.58.5(postcss@8.4.32)(vite@5.1.4)
+    version: 0.58.5(postcss@8.4.35)(vite@5.1.4)
 
 devDependencies:
   '@types/react':
-    specifier: 18.2.58
-    version: 18.2.58
+    specifier: 18.2.60
+    version: 18.2.60
   '@types/react-dom':
     specifier: 18.2.19
     version: 18.2.19
@@ -935,11 +935,11 @@ packages:
   /@types/react-dom@18.2.19:
     resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
     dependencies:
-      '@types/react': 18.2.58
+      '@types/react': 18.2.60
     dev: true
 
-  /@types/react@18.2.58:
-    resolution: {integrity: sha512-TaGvMNhxvG2Q0K0aYxiKfNDS5m5ZsoIBBbtfUorxdH4NGSXIlYvZxLJI+9Dd3KjeB3780bciLyAb7ylO8pLhPw==}
+  /@types/react@18.2.60:
+    resolution: {integrity: sha512-dfiPj9+k20jJrLGOu9Nf6eqxm2EyJRrq2NvwOFsfbb7sFExZ9WELPs67UImHj3Ayxg8ruTtKtNnbjaF8olPq0A==}
     dependencies:
       '@types/prop-types': 15.7.11
       '@types/scheduler': 0.16.8
@@ -1015,7 +1015,7 @@ packages:
       sirv: 2.0.4
     dev: false
 
-  /@unocss/postcss@0.58.5(postcss@8.4.32):
+  /@unocss/postcss@0.58.5(postcss@8.4.35):
     resolution: {integrity: sha512-m4L2YRdYfT6CV306Kl2VwEwbqa/92EpW4GE2Kqak1RuJyFJXBnWEEMJV4Uy6B1jWKLlCEWkuVUW33JUg7X6BxQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -1027,7 +1027,7 @@ packages:
       css-tree: 2.3.1
       fast-glob: 3.3.2
       magic-string: 0.30.7
-      postcss: 8.4.32
+      postcss: 8.4.35
     dev: false
 
   /@unocss/preset-attributify@0.58.5:
@@ -1811,15 +1811,6 @@ packages:
       pathe: 1.1.2
     dev: false
 
-  /postcss@8.4.32:
-    resolution: {integrity: sha512-D/kj5JNu6oo2EIy+XL/26JEDTlIbB8hw85G8StOE6L74RQAVVP5rej6wxCNqyMbR4RkPfqvezVbPw81Ngd6Kcw==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-    dev: false
-
   /postcss@8.4.35:
     resolution: {integrity: sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==}
     engines: {node: ^10 || ^12 || >=14}
@@ -1896,8 +1887,8 @@ packages:
       resize-observer-polyfill: 1.5.1
     dev: false
 
-  /rc-select@14.11.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-8J8G/7duaGjFiTXCBLWfh5P+KDWyA3KTlZDfV3xj/asMPqB2cmxfM+lH50wRiPIRsCQ6EbkCFBccPuaje3DHIg==}
+  /rc-select@14.12.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DJgL3pZGjoLOhV1IL8MUSyiZW+yLf/ArMvxZK8ES5HUadfAP2i5uPcaex9nGdX+MMk9iQ0iFTdMwwNt0ufNlqQ==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '*'
@@ -2122,7 +2113,7 @@ packages:
       mlly: 1.5.0
     dev: false
 
-  /unocss@0.58.5(postcss@8.4.32)(vite@5.1.4):
+  /unocss@0.58.5(postcss@8.4.35)(vite@5.1.4):
     resolution: {integrity: sha512-0g4P6jLgRRNnhscxw7nQ9RHGrKJ1UPPiHPet+YT3TXUcmy4mTiYgo9+kGQf5bjyrzsELJ10cT6Qz2y6g9Tls4g==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -2138,7 +2129,7 @@ packages:
       '@unocss/cli': 0.58.5
       '@unocss/core': 0.58.5
       '@unocss/extractor-arbitrary-variants': 0.58.5
-      '@unocss/postcss': 0.58.5(postcss@8.4.32)
+      '@unocss/postcss': 0.58.5(postcss@8.4.35)
       '@unocss/preset-attributify': 0.58.5
       '@unocss/preset-icons': 0.58.5
       '@unocss/preset-mini': 0.58.5
