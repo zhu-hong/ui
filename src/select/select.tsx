@@ -8,11 +8,21 @@ import type { BaseOptionType, SelectProps } from 'rc-select/lib/Select'
 import './select.css'
 
 export const Select: FC<
-  Omit<SelectProps, 'prefixCls'|'animation'|'allowClear'|'suffixIcon'|'optionRender'|'menuItemSelectedIcon'|'removeIcon'> & { arrowClear?: boolean; optionClassName?: string; optionRender: (opt: FlattenOptionData<BaseOptionType>) => ReactNode }
-> = ({ arrowClear, optionClassName, optionRender, ...other }) => {
+  Partial<
+    Omit<SelectProps, 'prefixCls'|'animation'|'allowClear'|'suffixIcon'|'optionRender'|'menuItemSelectedIcon'|'removeIcon'|'mode'>
+    &
+    {
+      arrowClear: boolean;
+      optionClassName: string;
+      optionRender: (opt: FlattenOptionData<BaseOptionType>) => ReactNode;
+      multiple: boolean;
+    }
+  >
+> = ({ arrowClear, optionClassName, optionRender, multiple = false, ...other }) => {
   return <>
     <RcSelect
       {...other}
+      mode={multiple?'multiple':undefined}
       prefixCls='d2mslt'
       animation='slide'
       allowClear={arrowClear ? {
@@ -28,6 +38,7 @@ export const Select: FC<
       listHeight={other.listHeight||520}
       dropdownMatchSelectWidth={other.dropdownMatchSelectWidth||false}
       suffixIcon={other.loading?<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#058373" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"></path><path fill="#058373" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"></animateTransform></path></svg>:null}
+      maxTagCount={other.maxTagCount||'responsive'}
     />
   </>
 }
