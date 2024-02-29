@@ -6,38 +6,67 @@ import 'react-simple-keyboard/build/css/index.css'
 import './style.css'
 import { useEffect } from 'react'
 
-export const Keyboard = ({ value, onChange, layout, point, onEnter, chinese }) => {
+export const Keyboard = ({ value = '', onChange = () => {}, layout = 'default', point = false, onEnter = null, chinese = false }) => {
   const kref = useRef(null)
 
   const [layoutName, setLayoutName] = useState(layout)
 
   const onKChange = (e) => {
-    if(layoutName === 'number' && e.split('').filter((t) => t === '.').length >= 2) {
-      e = e.split('.').slice(0,2).join('.')
-      kref.current.setInput(e)
+    if(layoutName === 'number') {
+      if(e.split('').filter((t) => t === '.').length >= 2) {
+        e = e.split('.').slice(0,2).join('.')
+        kref.current.setCaretPosition(e.length)
+        kref.current.setInput(e)
+      }
+      if(e[0] === '.') {
+        e = '0'+e
+        kref.current.setCaretPosition(e.length)
+        kref.current.setInput(e)
+      }
+      if(e[0] === '0' && e[1] !== '.' && (+e > 1 || +e === 0)) {
+        e = +e
+        kref.current.setCaretPosition(e.length) 
+        kref.current.setInput(e)
+      }
     }
-    onChange(e)
+    kref.current.setInput(e)
+    onChange(e.toString())
   }
-  const onKeyPress = (button, e) => {
-    if(e) {
-      e.preventDefault()
-      e.stopPropagation()
-    }
 
+  const onKeyPress = (button) => {
     if (button !== "{shift}" && button !== "{lock}" && button !== "{enter}") return
 
-    if(button !== '{enter}') {
-      setLayoutName(layoutName === 'default' ? 'shift' : 'default')
-    } else {
+    if(button === '{enter}') {
       if(typeof onEnter === 'function') {
         onEnter(value)
       }
+    } else {
+      setLayoutName(layoutName === 'default' ? 'shift' : 'default')
     }
   }
 
   useEffect(() => {
     if(kref.current !== null) {
       kref.current.setInput(value)
+      kref.current.setCaretPosition(value.length)
+
+      if(layoutName === 'number') {
+        if(value.includes('.')) {
+          kref.current.setOptions({
+            buttonAttributes: [
+              {
+                attribute: 'disabled',
+                value: 'true',
+                buttons: '.',
+              },
+            ],
+         })
+        } else {
+          kref.current.setOptions({
+            buttonAttributes: null
+         })
+        }
+      }
     }
   }, [value])
 
@@ -68,13 +97,16 @@ export const Keyboard = ({ value, onChange, layout, point, onEnter, chinese }) =
       ],
     }}
     display={{
-      "{shift}": "⇧",
-      "{lock}": "⇪",
+      "{shift}": "",
+      "{lock}": "",
       '{backspace}': '',
       '{enter}': 'Enter',
       '{space}': '',
     }}
     onKeyPress={onKeyPress}
     onChange={onKChange}
+    preventMouseDownDefault
+    useButtonTag
+    layoutCandidatesPageSize={8}
   />
 }

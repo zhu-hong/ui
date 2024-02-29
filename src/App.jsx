@@ -14,7 +14,7 @@ export const App = () => {
     </Ripple>
     <div className="h-screen"></div>
     <Input className='border p-4 mb-4' placement="top" number value={value} onChange={setValue} point />
-    <Input className='border p-4 mb-4' value={value1} chinese onChange={setValue1} onEnter={(value) => {
+    <Input className='border p-4 mb-4' value={value1} chinese onChange={setValue1} autoFocus onEnter={(value) => {
       console.log(value === value1)
       setValue1('')
     }} />

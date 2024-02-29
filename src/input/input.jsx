@@ -28,18 +28,18 @@ export const Input = ({ value, onChange, number = false, point = false, placemen
   return <div>
     <input ref={refs.setReference} {...getReferenceProps({
       value,
+      onChange: (e) => onChange(e.target.value),
       ...props,
-    })} onChange={(e) => {
-      onChange(e.target.value)
-    }} />
+    })} />
     <FloatingPortal root={document.getElementById('root')}>
       {
         open
         ?
-        <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()} className='fkeyboard' onPointerDown={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-        }}>
+        <div {...getFloatingProps({
+          className: 'fkeyboard',
+          ref: refs.setFloating,
+          style: floatingStyles,
+        })}>
           <Keyboard value={value} onChange={onChange} layout={number?'number':'default'} point={point} onEnter={onEnter} chinese={chinese} />
         </div>
         :
