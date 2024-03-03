@@ -48,7 +48,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.d2mslt-multiple.d2mslt-open.d2mslt-show-search .d2mslt-selection-placeholder {
+.d2mslt-multiple .d2mslt-selection-placeholder {
   padding: 0px 10px;
   position: absolute;
   top: 50%;
@@ -71,6 +71,7 @@
 }
 .d2mslt-selection-overflow {
   width: 100%;
+  min-height: 1.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;

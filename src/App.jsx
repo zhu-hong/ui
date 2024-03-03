@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Ripple } from "mui-ripple"
 import { Select } from "./select/select"
 import { Input } from "./input/input"
-import { ConfigDialog } from "./configDalog"
+import { ConfigDialog } from "./configDialog"
 
 export const App = () => {
   const [open, setOpen] = useState(false)
@@ -40,9 +40,10 @@ export const App = () => {
         {label:'卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡卡',value:'kal13'},
       ]}
       optionRender={(opt) => opt.value+'-'+opt.label}
+      multiple
     />
     <div className="h-screen"></div>
 
-    <ConfigDialog open={open} onClose={() => setOpen(false)} />
+    <ConfigDialog open={open} onClose={() => setOpen(false)} allowClose />
   </div>
 }
