@@ -81,15 +81,9 @@
   max-width: 100%;
   flex: none;
 }
-.d2mslt-selection-overflow-item-suffix {
-  display: none;
-}
-.d2mslt-open.d2mslt-show-search .d2mslt-selection-overflow-item-suffix {
-  display: block;
-}
 .d2mslt-selection-overflow-item:not(.d2mslt-selection-overflow-item-suffix) {
-  padding: 2px 4px 2px 8px;
-  border-radius: 12px;
+  padding: 2px 8px 2px 12px;
+  border-radius: 50px;
   background-color: #E9E9E9;
 }
 .d2mslt-selection-item-content {
@@ -97,6 +91,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 16px;
 }
 .d2mslt-selection-item-remove {
   flex: none;
