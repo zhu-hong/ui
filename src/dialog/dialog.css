@@ -47,6 +47,7 @@
   flex-direction: column;
   overflow: auto;
   transform: translateZ(0px);
+  box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.12);
 }
 .d2mdlg-header,.d2mdlg-footer {
   flex: 0 0 auto;

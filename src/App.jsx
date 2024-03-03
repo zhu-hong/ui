@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { Dialog } from "./dialog/dialog"
 import { Ripple } from "mui-ripple"
 import { Select } from "./select/select"
 import { Input } from "./input/input"
+import { ConfigDialog } from "./configDalog"
 
 export const App = () => {
   const [open, setOpen] = useState(false)
@@ -14,7 +14,7 @@ export const App = () => {
     </Ripple>
     <div className="h-screen"></div>
     <Input className='border p-4 mb-4' placement="top" number value={value} onChange={setValue} point />
-    <Input className='border p-4 mb-4' value={value1} chinese onChange={setValue1} autoFocus onEnter={(value) => {
+    <Input className='border p-4 mb-4' value={value1} chinese onChange={setValue1} onEnter={(value) => {
       console.log(value === value1)
       setValue1('')
     }} />
@@ -43,15 +43,6 @@ export const App = () => {
     />
     <div className="h-screen"></div>
 
-    <Dialog open={open} onClose={() => setOpen(false)}>
-      <div className="px-24px py-20px">
-        零零落落零零落落零零落落啦啦啦
-        零零落落零零落落零零落落啦啦啦
-        零零落落零零落落零零落落啦啦啦
-        零零落落零零落落零零落落啦啦啦
-        零零落落零零落落零零落落啦啦啦
-        零零落落零零落落零零落落啦啦啦
-      </div>
-    </Dialog>
+    <ConfigDialog open={open} onClose={() => setOpen(false)} />
   </div>
 }
