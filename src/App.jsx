@@ -3,6 +3,8 @@ import { Ripple } from "mui-ripple"
 import { Select } from "./select/select"
 import { Input } from "./input/input"
 import { ConfigDialog } from "./configDialog"
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
 
 export const App = () => {
   const [open, setOpen] = useState(false)
@@ -44,6 +46,8 @@ export const App = () => {
     />
     <div className="h-screen"></div>
 
-    <ConfigDialog open={open} onClose={() => setOpen(false)} allowClose />
+    <ToastContainer />
+
+    <ConfigDialog open={open} onClose={() => setOpen(false)} allowClose apiURL='http://192.168.3.171/api' onConfirm={console.log} onConfirmWarn={toast.warning} />
   </div>
 }

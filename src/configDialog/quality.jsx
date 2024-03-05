@@ -1,20 +1,50 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, forwardRef, useImperativeHandle } from "react"
 import { Select } from "@/select/select"
+import { useApi } from "./api"
 
 const CACHEID = 'quality-config-cache'
 
-export const QualityConfig = () => {
+export const QualityConfig = forwardRef(({ apiURL }, ref) => {
+  useImperativeHandle(ref, () => ({
+    getConfig() {
+      return new Promise((resolve, reject) => {
+        if(config.worktypes.length === 0) {
+          reject('请选择作业类型')
+          return
+        }
+        if(config.workcenter === undefined) {
+          reject('请选择检验中心')
+          return
+        }
+        resolve({
+          config,
+          cacheid: CACHEID,
+        })
+      })  
+    }
+  }))
+
+  const api = useApi(apiURL)
+
   const [config, setConfig] = useState(() => {
     const cache = localStorage.getItem(CACHEID)
     if(cache === null) {
       return {
-      }      
+        worktypes: ['过程检验IPQC'],
+        workcenter: undefined,
+        employeeGuid: undefined,
+        employeeCode: undefined,
+        employeeName: undefined,
+      }
     }
-    return JSON.stringify(cache)
+    return JSON.parse(cache)
   })
 
   const [workcenters, setWorkcenters] = useState(null)
   useEffect(() => {
+    api.GetWorkcenterForInspect().then((res) => {
+      setWorkcenters(res.data.map((w) => ({ ...w, value: w.WorkcenterGuid, label: w.WorkcenterName, })))
+    })
   }, [])
 
   return <>
@@ -24,10 +54,24 @@ export const QualityConfig = () => {
         className="w-400px text-#000c25"
         placeholder="请选择作业类型"
         multiple
+        value={config.worktypes}
+        onChange={(e) => setConfig({ ...config, worktypes: e })}
         options={[
           {
-            value: '来料检验',
-            label: '来料检验',
+            value: '过程检验IPQC',
+            label: '过程检验IPQC',
+          },
+          {
+            value: '来料检验IQC',
+            label: '来料检验IQC',
+          },
+          {
+            value: '成品检验FQC',
+            label: '成品检验FQC',
+          },
+          {
+            value: '出货检验OQC',
+            label: '出货检验OQC',
           },
         ]}
       />
@@ -37,9 +81,11 @@ export const QualityConfig = () => {
       <Select
         className="w-400px text-#000c25"
         placeholder="请选择检验中心"
+        value={config.workcenter}
+        onChange={(e) => setConfig({ ...config, workcenter: e })}
         options={workcenters}
         loading={workcenters===null}
       />
     </div>
   </>
-}
+})

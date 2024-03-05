@@ -1,12 +1,57 @@
 import { IconButton } from "@/button/iconButton"
 import { Select } from "@/select/select"
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, forwardRef, useState, useImperativeHandle } from "react"
 import { CheckIcon } from "./checkIcon"
+import { useApi } from "./api"
 
 const CACHEID = 'production-config-cache'
 
-export const ProductionConfig = () => {
+export const ProductionConfig = forwardRef(({ apiURL }, ref) => {
+  useImperativeHandle(ref, () => ({
+    getConfig() {
+      return new Promise((resolve, reject) => {
+        if(config.WorkshopGuid === undefined) {
+          reject('请选择所属区域')
+          return
+        }
+        if(config.MachineGuid === undefined) {
+          reject('请选择一体机')
+          return
+        }
+        // 判断是否要修改terminalInfo
+        let needUpdateTerminalInfo = false
+        const cache = localStorage.getItem(CACHEID)
+        if(cache === null) {
+          needUpdateTerminalInfo = true
+        } else {
+          const cacheConfig = JSON.parse(cache)
+          if(config.WorkshopGuid !== cacheConfig.WorkshopGuid || config.MachineGuid !== cacheConfig.MachineGuid || config.terminalType !== cacheConfig.terminalType) {
+            needUpdateTerminalInfo = true
+          }
+        }
+        if(needUpdateTerminalInfo) {
+          api.GetMachineDetail({ MachineGuid: config.MachineGuid }).then((res) => {
+            const { Workcenters: { [0]: { Workstations: _, ...Workcenter } }, Workstations: { [0]: Workstation } } = res
+            resolve({
+              config: {
+                ...config,
+                terminalInfo: [Workcenter,Workstation][config.terminalType],
+              },
+              cacheid: CACHEID,
+            })
+          })
+        } else {
+          resolve({
+            config,
+            cacheid: CACHEID,
+          })
+        }
+      })  
+    }
+  }))
+
+  const api = useApi(apiURL)
+
   const [config, setConfig] = useState(() => {
     const cache = localStorage.getItem(CACHEID)
     if(cache === null) {
@@ -15,32 +60,32 @@ export const ProductionConfig = () => {
         WorkshopName: undefined,
         MachineGuid: undefined,
         terminalType: 0,
-        terminalInfo: null,
-      }      
+        terminalInfo: undefined,
+      }
     }
-    const cacheConfig = JSON.stringify(cache)
+    const cacheConfig = JSON.parse(cache)
 
     return {
       ...cacheConfig,
-      terminalType: Number(config.terminalType),
+      terminalType: Number(cacheConfig.terminalType),
     }
   })
 
   const [areas, setAreas] = useState(null)
   useEffect(() => {
+    api.GetWorkshop().then((res) => {
+      setAreas(res.data.map((w) => ({ ...w, value: w.WorkshopGuid, label: w.WorkshopName })))
+    })
   }, [])
 
   const [machines, setMachines] = useState([])
   useEffect(() => {
     if(config.WorkshopGuid !== undefined) {
+      api.GetMachine({ WorkshopGuid: config.WorkshopGuid }).then((res) => {
+        setMachines(res.data.map((m) => ({ ...m, value: m.MachineGuid, label: m.MachineName })))
+      })
     }
   }, [config.WorkshopGuid])
-
-
-  useEffect(() => {
-    if(config.MachineGuid !== undefined) {
-    }
-  }, [config.MachineGuid])
 
   return <>
     <div className="flex items-center justify-between mt-24px">
@@ -51,18 +96,19 @@ export const ProductionConfig = () => {
         placeholder="请选择区域"
         loading={areas === null}
         options={areas}
-        onChange={(val, opt) => {
-          setConfig({
-            ...config,
-            MachineGuid: undefined,
-          })
-        }}
+        onChange={(_, opt) => setConfig({
+          ...config,
+          WorkshopGuid: opt.WorkshopGuid,
+          WorkshopName: opt.WorkshopName,
+          MachineGuid: undefined,
+        })}
       />
     </div>
     <div className="flex items-center justify-between mt-24px">
       <span>一体机：</span>
       <Select
         value={config.MachineGuid}
+        onChange={(e) => setConfig({ ...config, MachineGuid: e })}
         className="w-400px text-#000c25"
         placeholder="请选择"
         disabled={config.WorkshopGuid === undefined}
@@ -96,4 +142,4 @@ export const ProductionConfig = () => {
       </div>
     </div>
   </>
-}
+})
